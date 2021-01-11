@@ -1,6 +1,6 @@
 # Ndless-docker
 
-A Docker image for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the toolchain to develop C and assembly programs for the TI-Nspire graphing calculator.
+A Dockerfile for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the toolchain to develop C and assembly programs for the TI-Nspire graphing calculator.
 [Firebird Emu](https://github.com/nspire-emus/firebird) is not supported in this repository so far.
 
 ## Why docker?
@@ -13,9 +13,9 @@ A Docker image for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the t
 ### What you need to do first
 
 ```bash
-git clone https://github.com/stepney141/ndless-docker
-cd ndless-docker
-docker-compose up
+$ git clone https://github.com/stepney141/ndless-docker
+$ cd ndless-docker
+$ docker-compose up
 ```
 
 ### When you edit your sources
@@ -23,8 +23,8 @@ docker-compose up
 At first you need to do the following operation:
 
 ```bash
-cd <your_directory_path>/ndless-docker/src
-nspire-tools new "program-name"
+$ cd <your_directory_path>/ndless-docker/src
+$ nspire-tools new "program-name"
 ```
 
 Then the toolchain will create a Makefile to build ``program-name.tns``.  
