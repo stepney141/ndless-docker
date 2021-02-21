@@ -22,7 +22,7 @@ RUN apt-get update -y \
     zlib1g zlib1g-dev zlib1g-dbg \
     libboost-dev libboost-program-options-dev \
     wget \
-    python3 python3-dev texinfo
+    python3 python3-dev texinfo php
 
 ## Configure Ndless and the SDK
 RUN git clone --recursive https://github.com/ndless-nspire/Ndless.git
