@@ -9,19 +9,25 @@ WORKDIR /opt/ndless-dev
 SHELL ["/bin/bash", "-c"] 
 
 ## Install dependencies
+## dependencies for Linux:
+## "git, GCC (with c++ support), binutils, GMP (libgmp-dev), MPFR (libmpfr-dev), MPC (libmpc-dev), zlib, boost-program-options, wget"
 RUN apt-get update -y \
  && apt-get install -y \
-    git build-essential binutils libgmp-dev libmpfr-dev libmpc-dev zlib1g zlib1g-dev zlib1g-dbg libboost-dev libboost-program-options-dev wget python3 python3-dev
+    git \
+    build-essential \
+    binutils \
+    libgmp-dev \
+    libmpfr-dev \
+    libmpc-dev \
+    zlib1g zlib1g-dev zlib1g-dbg \
+    libboost-dev libboost-program-options-dev \
+    wget \
+    python3 python3-dev texinfo
 
 ## Configure Ndless and the SDK
 RUN git clone --recursive https://github.com/ndless-nspire/Ndless.git
 
-RUN cd Ndless/ndless-sdk/toolchain \
- # && sed -i -e "1 s/sh/bash/g" -e "16i echo 'now processing...'" build_toolchain.sh \
- # && sed -i -e "1 s/sh/bash/g" build_toolchain.sh \
- && chmod +x build_toolchain.sh
-RUN cd Ndless/ndless-sdk/toolchain \
- && ./build_toolchain.sh
+RUN cd Ndless/ndless-sdk/toolchain && chmod +x build_toolchain.sh && ./build_toolchain.sh
 
 ## Set PATH before building the toolchain
 ENV PATH /opt/ndless-dev/Ndless/ndless-sdk/toolchain/install/bin:/opt/ndless-dev/Ndless/ndless-sdk/bin:$PATH
