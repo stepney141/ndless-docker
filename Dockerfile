@@ -7,6 +7,8 @@ LABEL \
 
 WORKDIR /opt/ndless-dev
 SHELL ["/bin/bash", "-c"] 
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Tokyo
 
 ## Install dependencies
 ## dependencies for Linux:
