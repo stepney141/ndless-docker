@@ -9,13 +9,14 @@ WORKDIR /opt/ndless-dev
 SHELL ["/bin/bash", "-c"]
 
 ## Settings to avoid tzdata configuring
-## ref: https://sleepless-se.net/2018/07/31/docker-build-tzdata-ubuntu/, https://github.com/phusion/baseimage-docker/issues/319
+## ref: https://sleepless-se.net/2018/07/31/docker-build-tzdata-ubuntu/ or https://github.com/phusion/baseimage-docker/issues/319
 ENV TZ=UTC
 ENV DEBIAN_FRONTEND=noninteractive
 
 ## Install dependencies
-## dependencies for Linux:
+## Dependencies of Ndless SDK for Linux are:
 ## "git, GCC (with c++ support), binutils, GMP (libgmp-dev), MPFR (libmpfr-dev), MPC (libmpc-dev), zlib, boost-program-options, wget"
+## But your computer fails to build the SDK if these packages are not installed in: python3, python3-dev, texinfo, and php
 RUN apt-get update -y \
  && apt-get install -y \
     git \
@@ -37,6 +38,8 @@ RUN cd Ndless/ndless-sdk/toolchain && chmod +x build_toolchain.sh && ./build_too
 ENV PATH /opt/ndless-dev/Ndless/ndless-sdk/toolchain/install/bin:/opt/ndless-dev/Ndless/ndless-sdk/bin:$PATH
 
 ## Build Ndless and the SDK
+## In line 44 your computer checks whether everything has been set up correctly
 RUN cd /opt/ndless-dev/Ndless \
  && make \
- && test "$(nspire-gcc 2>&1)" = "$(echo -e "arm-none-eabi-gcc: fatal error: no input files\ncompilation terminated.")"
+ && test "$(nspire-gcc 2>&1)" = "$(echo -e "arm-none-eabi-gcc: fatal error: no input files\ncompilation terminated.")" \
+ && mkdir /opt/ndless-dev/src

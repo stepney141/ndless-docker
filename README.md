@@ -10,27 +10,42 @@ A Dockerfile for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the too
 
 ## Usage
 
-### What you need to do first
+### How to install Ndless SDK
 
 ```bash
 $ git clone https://github.com/stepney141/ndless-docker
 $ cd ndless-docker
-$ docker-compose up
+$ docker-compose up -d
 ```
 
-### When you edit your sources
+That is all. If the SDK has been installed correctly, you should see some outputs similar to these:
+
+```
+...
+make[3]: Leaving directory '/opt/ndless-dev/Ndless/ndless/src/installer-5.2'
+make[2]: Leaving directory '/opt/ndless-dev/Ndless/ndless/src'
+make[1]: Leaving directory '/opt/ndless-dev/Ndless/ndless'
+Removing intermediate container d69c543bbab8
+ ---> 3715a1d66a8f
+Successfully built 3715a1d66a8f
+Successfully tagged ndless-docker_ndless-dev:latest
+```
+
+For your information, the installation took 78 minutes on my HP Spectre 13-ae019TU laptop computer.
+
+### How to build your sources
 
 At first you need to do the following operation:
 
 ```bash
-$ cd <your_directory_path>/ndless-docker/src
+$ cd ndless-docker/src
 $ nspire-tools new "program-name"
 ```
 
 Then the toolchain will create a Makefile to build ``program-name.tns``.  
-After that you will create a new ``*.c`` file, edit your program, and run ``make`` to build it.
+Next create a new ``*.c`` file, edit your program, and run ``make`` to build it.
 
-In default settings, your sources need to be in ``ndless-docker/src``.  
+In default settings, your sources have to be in ``ndless-docker/src``.  
 You can change all configs by modifying ``docker-compose.yml``.
 
 ## Reference

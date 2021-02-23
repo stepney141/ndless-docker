@@ -1,7 +1,14 @@
-version: "3"
+version: '3.3'
 services:
   ndless-dev:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ndless-dev
+    container_name: ndless-dev
     volumes:
-      - ./src:/calc/src
+      - type: bind
+        source: ./src
+        target: /opt/ndless-dev/src
+    stdin_open: true
     tty: true
