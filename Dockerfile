@@ -6,9 +6,12 @@ LABEL \
     description="Ndless SDK"
 
 WORKDIR /opt/ndless-dev
-SHELL ["/bin/bash", "-c"] 
+SHELL ["/bin/bash", "-c"]
+
+## Settings to avoid tzdata configuring
+## ref: https://sleepless-se.net/2018/07/31/docker-build-tzdata-ubuntu/, https://github.com/phusion/baseimage-docker/issues/319
+ENV TZ=UTC
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=Asia/Tokyo
 
 ## Install dependencies
 ## dependencies for Linux:
@@ -28,7 +31,6 @@ RUN apt-get update -y \
 
 ## Configure Ndless and the SDK
 RUN git clone --recursive https://github.com/ndless-nspire/Ndless.git
-
 RUN cd Ndless/ndless-sdk/toolchain && chmod +x build_toolchain.sh && ./build_toolchain.sh
 
 ## Set PATH before building the toolchain
@@ -37,4 +39,4 @@ ENV PATH /opt/ndless-dev/Ndless/ndless-sdk/toolchain/install/bin:/opt/ndless-dev
 ## Build Ndless and the SDK
 RUN cd /opt/ndless-dev/Ndless \
  && make \
- && nspire-gcc
+ && test "$(nspire-gcc 2>&1)" = "$(echo -e "arm-none-eabi-gcc: fatal error: no input files\ncompilation terminated.")"
