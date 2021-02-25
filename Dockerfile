@@ -28,11 +28,10 @@ RUN apt-get update -y \
     zlib1g zlib1g-dev zlib1g-dbg \
     libboost-dev libboost-program-options-dev \
     wget \
-    python3 python3-dev texinfo php
-
+    python3 python3-dev texinfo php \
 ## Configure Ndless and the SDK
-RUN git clone --recursive https://github.com/ndless-nspire/Ndless.git
-RUN cd Ndless/ndless-sdk/toolchain && chmod +x build_toolchain.sh && ./build_toolchain.sh
+ && git clone --recursive https://github.com/ndless-nspire/Ndless.git \
+ && cd Ndless/ndless-sdk/toolchain && chmod +x build_toolchain.sh && ./build_toolchain.sh
 
 ## Set PATH before building the toolchain
 ENV PATH /opt/ndless-dev/Ndless/ndless-sdk/toolchain/install/bin:/opt/ndless-dev/Ndless/ndless-sdk/bin:$PATH
@@ -41,5 +40,4 @@ ENV PATH /opt/ndless-dev/Ndless/ndless-sdk/toolchain/install/bin:/opt/ndless-dev
 ## In line 44 your computer checks whether everything has been set up correctly
 RUN cd /opt/ndless-dev/Ndless \
  && make \
- && test "$(nspire-gcc 2>&1)" = "$(echo -e "arm-none-eabi-gcc: fatal error: no input files\ncompilation terminated.")" \
- && mkdir /opt/ndless-dev/src
+ && test "$(nspire-gcc 2>&1)" = "$(echo -e "arm-none-eabi-gcc: fatal error: no input files\ncompilation terminated.")"
