@@ -15,7 +15,7 @@ A Dockerfile for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the too
 ```bash
 $ git clone https://github.com/stepney141/ndless-docker
 $ cd ndless-docker
-$ docker-compose up
+$ docker-compose up --build
 ```
 
 That is all. If the SDK has been installed correctly, you should see some outputs similar to these:
@@ -36,7 +36,7 @@ For instance, setting up Ndless SDK with this Dockerfile took 78 minutes on my H
 
 ### How to build your source
 
-After building the Docker image with ``$ cd ndless-docker && docker-compose up``, do following operations in the container:
+After starting the Docker container with ``$ cd ndless-docker && docker-compose up``, do following operations in the container:
 
 ```bash
 $ cd /opt/ndless-dev/src
