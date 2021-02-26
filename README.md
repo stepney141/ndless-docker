@@ -20,7 +20,7 @@ A Dockerfile for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the too
 ```
 $ git clone https://github.com/stepney141/ndless-docker
 $ cd ndless-docker
-$ docker-compose up --build
+$ docker-compose up -d --build
 ```
 
 That is all. If the SDK has been installed correctly, you should see some outputs similar to these ones:
@@ -41,7 +41,7 @@ Creating ndless-dev ... done
 In general, building and installing a cross compiler tends to take a long time.
 For instance, setting up Ndless SDK with this Dockerfile took 78 minutes on my HP Spectre 13-ae019TU laptop computer.
 
-If you get messages like the above ones, you can stop the Docker container:
+If you get output messages like the above ones, you can stop the Docker container:
 
 ```
 $ docker-compose down
@@ -49,7 +49,9 @@ $ docker-compose down
 
 ### How to build your source
 
-After starting the Docker container with ``$ cd ndless-docker && docker-compose up -d``, do following operations in the container:
+First, make sure that your source files are in ``ndless-docker/src`` on your local storage.
+
+After starting the Docker container with ``cd ndless-docker && docker-compose up -d``, enter in it with ``docker-compose exec ndless-dev bash`` and do following operations in the container:
 
 ```
 # cd /opt/ndless-dev/src
@@ -57,10 +59,10 @@ After starting the Docker container with ``$ cd ndless-docker && docker-compose 
 ```
 
 Then the toolchain will create a Makefile to build ``program-name.tns``.  
-Next, create a new ``*.c`` file in  ``ndless-docker/src`` directory on your local storage, edit your program, and run ``make`` in the Docker container to build it.
+Next, run ``make`` in the Docker container to build it.
 
 In default settings, your sources have to be in ``ndless-docker/src`` on local.  
-You can change all configs by modifying ``docker-compose.yml``.
+You can change all configs for the container by modifying ``docker-compose.yml``.
 
 ## Reference
 

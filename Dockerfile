@@ -10,8 +10,8 @@ SHELL ["/bin/bash", "-c"]
 
 ## Settings to avoid tzdata configuring
 ## ref: https://sleepless-se.net/2018/07/31/docker-build-tzdata-ubuntu/ or https://github.com/phusion/baseimage-docker/issues/319
-ENV TZ=UTC
-ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC \
+    DEBIAN_FRONTEND=noninteractive
 
 ## Install dependencies
 ## Dependencies of Ndless SDK for Linux are:
@@ -37,7 +37,7 @@ RUN apt-get update -y \
 ENV PATH /opt/ndless-dev/Ndless/ndless-sdk/toolchain/install/bin:/opt/ndless-dev/Ndless/ndless-sdk/bin:$PATH
 
 ## Build Ndless and the SDK
-## In line 44 your computer checks whether everything has been set up correctly
+## In line 43 your computer checks whether everything has been set up correctly
 RUN cd /opt/ndless-dev/Ndless \
  && make \
  && test "$(nspire-gcc 2>&1)" = "$(echo -e "arm-none-eabi-gcc: fatal error: no input files\ncompilation terminated.")"
