@@ -1,11 +1,11 @@
 # Ndless-docker
 
-A Dockerfile for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the toolchain to develop C and assembly programs for the TI-Nspire graphing calculator.
-[The official Docker image](https://hub.docker.com/r/ndless/ndless-sdk) is old and not maintained, so have a try at this "Ndless-docker".
+Dockerfile for [Ndless SDK](https://github.com/ndless-nspire/Ndless/), the toolchain to develop C and assembly programs for the TI-Nspire graphing calculator.
+[The official Docker image](https://hub.docker.com/r/ndless/ndless-sdk) is old and not maintained so have a try at this "Ndless-docker".
 
 ## Why docker?
 
-- You don't have to scatter your local environment for *just a toolchain*
+- Installing a toolchain with Docker won't clutter your local environment
 - You can use Ndless SDK anywhere Docker runs
 
 ## Requirements
